@@ -1,42 +1,35 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
+	"adventofcode"
 	"log"
-	"os"
-	"strconv"
-	"strings"
+	"reflect"
 	"testing"
 )
 
 func TestDiagnostTool(t *testing.T) {
 	t.Run("check splitInstruction", func(t *testing.T) {
 		got := splitInstruction(76)
-		//want := []int{0, 0, 1, 1}
-		fmt.Printf("%#v", got)
-
+		want := []int{0, 0, 7, 6}
+		if !reflect.DeepEqual(got, want) {
+			log.Fatalf("want: %#v, got: %#v", want, got)
+		}
 	})
-	t.Run("check DiagnostTool", func(t *testing.T) {
-		file, err := os.Open("./input.txt")
-		if err != nil {
-			log.Fatal(err)
+	t.Run("check IntCodeComputer part1", func(t *testing.T) {
+		instructionsInt := adventofcode.GetInputsNumInOneline("./input.txt", ",")
+		got := IntCodeComputer(instructionsInt, 1)
+		want := 6745903
+		if got != want {
+			log.Fatalf("want: %d, got: %d", want, got)
 		}
-		defer file.Close()
-		scanner := bufio.NewScanner(file)
-		var instructions []string
-		for scanner.Scan() {
-			text := scanner.Text()
-			instructions = strings.Split(text, ",")
-			break
-		}
+	})
 
-		var instructionsInt []int
-		for _, num := range instructions {
-			number, _ := strconv.Atoi(num)
-			instructionsInt = append(instructionsInt, number)
+	t.Run("check IntCodeComputer part2", func(t *testing.T) {
+		instructionsInt := adventofcode.GetInputsNumInOneline("./input.txt", ",")
+		got := IntCodeComputer(instructionsInt, 5)
+		want := 9168267
+		if got != want {
+			log.Fatalf("want: %d, got: %d", want, got)
 		}
-
-		fmt.Println(DiagnostTool(instructionsInt, 1))
 	})
 }
