@@ -30,7 +30,9 @@ func DiagnostTool(instructions []int, input int) int {
 	var firstIdx int
 	var secondIdx int
 	var outputIdx int
-	for i < len(instructions) {
+
+loop:
+	for {
 		instructNumbers = splitInstruction(instructions[i])
 		firstIdx = instructions[i+1]
 		secondIdx = instructions[i+2]
@@ -71,7 +73,7 @@ func DiagnostTool(instructions []int, input int) int {
 				result = firstIdx
 			}
 			if instructions[i+2] == 99 {
-				return result
+				break loop
 			}
 			i += 2
 		}
