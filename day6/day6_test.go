@@ -2,7 +2,6 @@ package day6
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -38,6 +37,27 @@ func TestCaculateOrbits(t *testing.T) {
 	t.Run("check CaculateOrbits", func(t *testing.T) {
 		inputs := GetInputs("./input.txt")
 		got := CaculateOrbits(inputs)
-		fmt.Println(got)
+		want := 154386
+		if got != want {
+			log.Fatalf("want: %d, got: %d", want, got)
+		}
+	})
+
+	t.Run("test minimumTransfers", func(t *testing.T) {
+		inputs := GetInputs("./test2.txt")
+		got := MinimumTransfers("YOU", "SAN", inputs)
+		want := 4
+		if got != want {
+			log.Fatalf("want: %d, got: %d", want, got)
+		}
+	})
+
+	t.Run("check minimumTransfers", func(t *testing.T) {
+		inputs := GetInputs("./input.txt")
+		got := MinimumTransfers("YOU", "SAN", inputs)
+		want := 346 // right answer
+		if got != want {
+			log.Fatalf("want: %d, got: %d", want, got)
+		}
 	})
 }
